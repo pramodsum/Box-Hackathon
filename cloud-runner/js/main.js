@@ -2,7 +2,7 @@
 enchant();
  
 var browserWidth = window.innerWidth || document.body.clientWidth;
-var browserHeight = window.innerHeight || document.body.clientHeight + 100;
+var browserHeight = window.innerHeight || document.body.clientHeight;
 window.onload = function() {
 
     // Starting point
