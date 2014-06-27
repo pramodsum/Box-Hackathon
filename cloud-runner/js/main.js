@@ -11,6 +11,8 @@ window.onload = function() {
 	var game = new Game(browserWidth, browserHeight);
     game.preload(
                  'res/unicornSheetV1.png',
+                 'res/unicorn.gif',
+                 'res/gameover.png',
                  'res/drive.png',
                  'res/Hit.mp3',
                  'res/bgm.mp3',
@@ -226,6 +228,21 @@ var SceneGameOver = Class.create(Scene, {
         gameOverLabel.y = (browserHeight/2)-120;
         gameOverLabel.color = 'black';
         gameOverLabel.font = '32px Impact';
+        gameOverLabel.textAlign = 'center';
+
+        gameOverLabel.image = Game.instance.assets['res/gameover.png'];
+        gameOverLabel.x = (browserWidth/2)-150;
+        gameOverLabel.y = (browserHeight/2);
+        gameOverLabel.textAlign = 'center';
+
+        gameOverLabel.image = Game.instance.assets['res/unicorn.gif'];
+        gameOverLabel.x = (browserWidth/2)-350;
+        gameOverLabel.y = (browserHeight/2);
+        gameOverLabel.textAlign = 'center';
+
+        gameOverLabel.image = Game.instance.assets['res/unicorn.gif'];
+        gameOverLabel.x = (browserWidth/2)+350;
+        gameOverLabel.y = (browserHeight/2);
         gameOverLabel.textAlign = 'center';
 
         scoreLabel = new Label('SCORE:   ' + score);
