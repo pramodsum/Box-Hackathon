@@ -5288,22 +5288,18 @@ if (window.Deferred) {
         fail: function(arg) {
             var result, err,
                 queue = this;
-            try {
-                while (queue && !queue._fail) {
-                    queue = queue._next;
-                }
-                if (queue instanceof enchant.Deferred) {
-                    result = queue._fail(arg);
-                    queue.call(result);
-                } else if (arg instanceof Error) {
-                    throw arg;
-                } else {
-                    err = new Error('failed in Deferred');
-                    err.arg = arg;
-                    throw err;
-                }
-            } catch(err) {
-                //fuck
+            while (queue && !queue._fail) {
+                queue = queue._next;
+            }
+            if (queue instanceof enchant.Deferred) {
+                result = queue._fail(arg);
+                queue.call(result);
+            } else if (arg instanceof Error) {
+                throw arg;
+            } else {
+                err = new Error('failed in Deferred');
+                err.arg = arg;
+                throw err;
             }
         }
     });
