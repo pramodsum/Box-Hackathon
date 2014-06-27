@@ -11,8 +11,9 @@ window.onload = function() {
 	var game = new Game(browserWidth, browserHeight-50);
     game.preload(
                  'res/unicornSheetV1.png',
+                 'res/unicorn.gif',
+                 'res/gameover.png',
                  'res/drive.png',
-				 'res/unicornGameOver.png',
                  'res/Hit.mp3',
                  'res/bgm.mp3',
 				 'res/deadUnicornV001.jpg');
@@ -46,7 +47,7 @@ var SceneGame = Class.create(Scene, {
         label = new Label('SCORE:   0');
         label.x = game.width/2-150;
         label.y = 50;        
-        label.color = 'white';
+        label.color = 'black';
         label.font = '25px Impact';
         label.textAlign = 'center';
         label._style.textShadow ="-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black";
@@ -167,8 +168,7 @@ var SceneGame = Class.create(Scene, {
 
 var UnicornGameOver = Class.create (Sprite, {
 	initialize: function() {
-		Sprite.apply(this,[browserWidth,browserHeight-50]);
-		this.image = Game.instance.assets['res/deadUnicornV001.jpg'];
+		Sprite.apply(this,[browserWidth,browserHeight]);
 	}
 });
 
@@ -220,20 +220,34 @@ var SceneGameOver = Class.create(Scene, {
         var gameOverLabel, scoreLabel, unicornGameOver, game;
 		game = Game.instance;
         Scene.apply(this);
-        this.backgroundColor = 'black';
-		this.image = Game.instance.assets['res/deadUnicornV001.jpg'];
+		// this.image = Game.instance.assets['res/deadUnicornV001.jpg'];
 
         gameOverLabel = new Label("Tap to Restart!");
-        gameOverLabel.x = (game.width/2)-150;
-        gameOverLabel.y = (game.height/2)-120;
-        gameOverLabel.color = 'white';
+        gameOverLabel.x = (browserWidth/2)-150;
+        gameOverLabel.y = (browserHeight/2)-120;
+        gameOverLabel.color = 'black';
         gameOverLabel.font = '32px Impact';
+        gameOverLabel.textAlign = 'center';
+
+        gameOverLabel.image = Game.instance.assets['res/gameover.png'];
+        gameOverLabel.x = (browserWidth/2)-150;
+        gameOverLabel.y = (browserHeight/2);
+        gameOverLabel.textAlign = 'center';
+
+        gameOverLabel.image = Game.instance.assets['res/unicorn.gif'];
+        gameOverLabel.x = (browserWidth/2)-350;
+        gameOverLabel.y = (browserHeight/2);
+        gameOverLabel.textAlign = 'center';
+
+        gameOverLabel.image = Game.instance.assets['res/unicorn.gif'];
+        gameOverLabel.x = (browserWidth/2)+350;
+        gameOverLabel.y = (browserHeight/2);
         gameOverLabel.textAlign = 'center';
 
         scoreLabel = new Label('SCORE:   ' + score);
         scoreLabel.x = (game.width/2)-150;
-        scoreLabel.y = 50;        
-        scoreLabel.color = 'white';
+        scoreLabel.y = 100;        
+        scoreLabel.color = 'black';
         scoreLabel.font = '25px Impact';
         scoreLabel.textAlign = 'center';
 
