@@ -104,7 +104,7 @@ Q.Sprite.extend("VerticalEnemy", {
         this._super(p, { sheet: 'enemy', vy: -100, rangeY: 200, gravity: 0  });
         this.add("2d, aiBounce");                
         this.p.initialY = this.p.y;
-        
+
         // Listen for a sprite collision, if it's the player,
         // end the game unless the enemy is hit on top
         this.on("bump.left,bump.right,bump.bottom",function(collision) {
@@ -154,10 +154,12 @@ Q.scene("level1",function(stage) {
   stage.add("viewport").follow(player);
 
   // Add in a couple of enemies
+  stage.insert(new Q.Enemy({ x: 600, y: 0 }));
   stage.insert(new Q.Enemy({ x: 700, y: 0 }));
   stage.insert(new Q.Enemy({ x: 800, y: 0 }));
-  stage.insert(new Q.VerticalEnemy({x: 800, y: 120, rangeY: 70, asset: "fly.png" }));
-  stage.insert(new Q.VerticalEnemy({x: 800, y: 120, rangeY: 70, asset: "fly.png" }));
+  stage.insert(new Q.Enemy({ x: 900, y: 0 }));
+  stage.insert(new Q.VerticalEnemy({x: 500, y: 120, rangeY: 70, asset: "fly.png" }));
+  stage.insert(new Q.VerticalEnemy({x: 400, y: 120, rangeY: 70, asset: "fly.png" }));
 
   // Finally add in the tower goal
   stage.insert(new Q.Tower({ x: 180, y: 50 }));
