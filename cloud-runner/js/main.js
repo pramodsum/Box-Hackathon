@@ -11,7 +11,7 @@ window.onload = function() {
 	var game = new Game(browserWidth, browserHeight);
     game.preload(
                  'res/unicornSheetV1.png',
-                 'res/unicorn.gif',
+                 // 'res/unicorn.gif',
                  'res/gameover.png',
                  'res/drive.png',
                  'res/Hit.mp3',
