@@ -223,7 +223,7 @@ var SceneGameOver = Class.create(Scene, {
 
         gameOverLabel = new Label("Tap to Restart!");
         gameOverLabel.x = (browserWidth/2)-150;
-        gameOverLabel.y = (game.height/2)-120;
+        gameOverLabel.y = (browserHeight/2)-120;
         gameOverLabel.color = 'black';
         gameOverLabel.font = '32px Impact';
         gameOverLabel.textAlign = 'center';
