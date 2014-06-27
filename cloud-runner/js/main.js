@@ -15,7 +15,6 @@ window.onload = function() {
                  'res/gameover.png',
                  'res/drive.png',
                  'res/Hit.mp3',
-                 'res/bgm.mp3',
 				 'res/deadUnicornV001.jpg');
     game.fps = 30;
     game.scale = 1;
@@ -75,9 +74,6 @@ var SceneGame = Class.create(Scene, {
         this.generatedriveTimer = 0;
         this.scoreTimer = 0;
         this.score = 0;
-
-        this.bgm = game.assets['res/bgm.mp3']; // Add this line
-        this.bgm = game.assets['res/bgm.ogg']; // Add this line
  
         // Start BGM
         this.bgm.play();
