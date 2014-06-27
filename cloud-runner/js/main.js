@@ -229,21 +229,6 @@ var SceneGameOver = Class.create(Scene, {
         gameOverLabel.font = '32px Impact';
         gameOverLabel.textAlign = 'center';
 
-        gameOverLabel.image = Game.instance.assets['res/gameover.png'];
-        gameOverLabel.x = (browserWidth/2)-150;
-        gameOverLabel.y = (browserHeight/2);
-        gameOverLabel.textAlign = 'center';
-
-        gameOverLabel.image = Game.instance.assets['res/unicorn.gif'];
-        gameOverLabel.x = (browserWidth/2)-350;
-        gameOverLabel.y = (browserHeight/2);
-        gameOverLabel.textAlign = 'center';
-
-        gameOverLabel.image = Game.instance.assets['res/unicorn.gif'];
-        gameOverLabel.x = (browserWidth/2)+350;
-        gameOverLabel.y = (browserHeight/2);
-        gameOverLabel.textAlign = 'center';
-
         scoreLabel = new Label('SCORE:   ' + score);
         scoreLabel.x = (game.width/2)-150;
         scoreLabel.y = 100;        
