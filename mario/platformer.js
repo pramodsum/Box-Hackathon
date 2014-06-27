@@ -7,6 +7,8 @@
 // This is the example from the website homepage, it consists
 // a simple, non-animated platformer with some enemies and a 
 // target for the player.
+document.getElementById("back").style.zIndex="1000";
+
 window.addEventListener("load",function() {
 
 // Set up an instance of the Quintus engine  and include
