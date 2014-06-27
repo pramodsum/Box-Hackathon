@@ -10,7 +10,7 @@ window.onload = function() {
 	//var game = new Game(440, 320);
 	var game = new Game(browserWidth, browserHeight);
     game.preload(//'res/BG.png',
-				 'res/newBGV001.png',
+				 'res/clouds.gif',
                  'res/unicornSheetV1.png',
                  'res/drive.png',
 				 'res/unicornGameOver.png',
@@ -48,14 +48,14 @@ var SceneGame = Class.create(Scene, {
         label = new Label('SCORE: <br>0');
         label.x = game.width/2-130;
         label.y = 32;        
-        label.color = 'white';
+        label.color = 'black';
         label.font = '16px strong';
         label.textAlign = 'center';
         label._style.textShadow ="-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black";
         this.scoreLabel = label;        
  
         bg = new Sprite(browserWidth, browserHeight);
-        bg.image = game.assets['res/newBGV001.png'];
+        bg.image = game.assets['res/clouds.gif'];
 
         unicorn = new Unicorn();
         unicorn.y = game.height/2 - unicorn.height/2;
