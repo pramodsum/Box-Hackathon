@@ -222,7 +222,7 @@ var SceneGameOver = Class.create(Scene, {
 		// this.image = Game.instance.assets['res/deadUnicornV001.jpg'];
 
         gameOverLabel = new Label("Tap to Restart!");
-        gameOverLabel.x = (game.width/2)-150;
+        gameOverLabel.x = (browserWidth.width/2)-150;
         gameOverLabel.y = (game.height/2)-120;
         gameOverLabel.color = 'black';
         gameOverLabel.font = '32px Impact';
