@@ -58,6 +58,29 @@ Q.Sprite.extend("Player",{
   }
 
 });
+        
+//component for common enemy behaviors
+Q.component("commonEnemy", {
+    added: function() {
+        var entity = this.entity;
+        entity.on("bump.left,bump.right,bump.bottom",function(collision) {
+            if(collision.obj.isA("Player")) {                        
+              Q.stageScene("endGame",1, { label: "Game Over" }); 
+              collision.obj.destroy();
+            }
+        });
+        entity.on("bump.top",function(collision) {
+            if(collision.obj.isA("Player")) { 
+                //make the player jump
+                collision.obj.p.vy = -100;
+                
+                //kill enemy
+                this.destroy();
+            }
+        });
+    },
+    
+});
 
 
 // ## Tower Sprite
@@ -76,7 +99,7 @@ Q.Sprite.extend("Enemy",{
 
     // Enemies use the Bounce AI to change direction 
     // whenver they run into something.
-    this.add('2d, aiBounce');
+    this.add("2d, aiBounce, commonEnemy");     
 
     // Listen for a sprite collision, if it's the player,
     // end the game unless the enemy is hit on top
@@ -102,22 +125,8 @@ Q.Sprite.extend("Enemy",{
 Q.Sprite.extend("VerticalEnemy", {
     init: function(p) {
         this._super(p, {vy: -100, rangeY: 200, gravity: 0 });
-        this.add("2d");
-        
+        this.add("2d, commonEnemy");           
         this.p.initialY = this.p.y;
-        
-        this.on("bump.left,bump.right,bump.bottom",function(collision) {
-            if(collision.obj.isA("Player")) { 
-              Q.stageScene("endGame",1, { label: "Game Over" }); 
-              collision.obj.destroy();
-            }
-        });
-        this.on("bump.top",function(collision) {
-            if(collision.obj.isA("Player")) { 
-              collision.obj.p.vy = -100;
-              this.destroy();
-            }
-        });
     },
     step: function(dt) {                
         if(this.p.y - this.p.initialY >= this.p.rangeY && this.p.vy > 0) {
@@ -152,10 +161,10 @@ Q.scene("level1",function(stage) {
   // Add in a couple of enemies
   stage.insert(new Q.Enemy({ x: 600, y: 0 }));
   stage.insert(new Q.Enemy({ x: 700, y: 0 }));
+  stage.insert(new Q.VerticalEnemy({x: 500, y: 120, rangeY: 70, asset: "fly.png" }));
+  stage.insert(new Q.VerticalEnemy({x: 1000, y: 120, rangeY: 70, asset: "fly.png" }));
   stage.insert(new Q.Enemy({ x: 800, y: 0 }));
   stage.insert(new Q.Enemy({ x: 900, y: 0 }));
-  stage.insert(new Q.VerticalEnemy({x: 500, y: 120, rangeY: 70, asset: "fly.png" }));
-  stage.insert(new Q.VerticalEnemy({x: 400, y: 120, rangeY: 70, asset: "fly.png" }));
 
   // Finally add in the tower goal
   stage.insert(new Q.Tower({ x: 180, y: 50 }));
