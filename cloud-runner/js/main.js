@@ -45,7 +45,7 @@ var SceneGame = Class.create(Scene, {
         label = new Label('SCORE:   0');
         label.x = game.width/2-150;
         label.y = 50;        
-        label.color = 'white';
+        label.color = 'black';
         label.font = '25px Impact';
         label.textAlign = 'center';
         label._style.textShadow ="-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black";
@@ -224,14 +224,14 @@ var SceneGameOver = Class.create(Scene, {
         gameOverLabel = new Label("Tap to Restart!");
         gameOverLabel.x = (game.width/2)-150;
         gameOverLabel.y = (game.height/2)-120;
-        gameOverLabel.color = 'white';
+        gameOverLabel.color = 'black';
         gameOverLabel.font = '32px Impact';
         gameOverLabel.textAlign = 'center';
 
         scoreLabel = new Label('SCORE:   ' + score);
         scoreLabel.x = (game.width/2)-150;
-        scoreLabel.y = 50;        
-        scoreLabel.color = 'white';
+        scoreLabel.y = 100;        
+        scoreLabel.color = 'black';
         scoreLabel.font = '25px Impact';
         scoreLabel.textAlign = 'center';
 
