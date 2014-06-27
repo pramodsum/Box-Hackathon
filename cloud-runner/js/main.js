@@ -55,7 +55,7 @@ var SceneGame = Class.create(Scene, {
         this.scoreLabel = label;        
  
         bg = new Sprite(browserWidth, browserHeight);
-        bg.image = game.assets['res/newBGV001.jpg'];
+        bg.image = game.assets['res/newBGV001.png'];
 
         unicorn = new Unicorn();
         unicorn.y = game.height/2 - unicorn.height/2;
