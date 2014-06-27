@@ -11,12 +11,12 @@ window.onload = function() {
 	var game = new Game(browserWidth, browserHeight);
     game.preload(
                  'res/unicornSheetV1.png',
-                 // 'res/unicorn.gif',
                  'res/gameover.png',
                  'res/drive.png',
                  'res/Hit.mp3',
                  'res/bgm.mp3',
-				 'res/deadUnicornV001.jpg');
+				 'res/deadUnicornV001.jpg',
+				 'res/unicorn-gameover.png');
     game.fps = 30;
     game.scale = 1;
     game.onload = function() {
@@ -161,15 +161,16 @@ var SceneGame = Class.create(Scene, {
     },
 
     switchToLaneNumber: function(lane){  
-        var targetY = 300 - this.height/2 + (lane-1)*150;
+        var targetY = 300 - this.height/2 + (lane-1)*165;
         this.y = targetY;
     }
 });
 
 var UnicornGameOver = Class.create (Sprite, {
 	initialize: function() {
-		Sprite.apply(this,[browserWidth,browserHeight]);
-	}
+		Sprite.apply(this,[576,340]);
+		this.image = Game.instance.assets['res/unicorn-gameover.png'];
+		}
 });
 
 var Drive = Class.create(Sprite, {
@@ -222,24 +223,19 @@ var SceneGameOver = Class.create(Scene, {
         Scene.apply(this);
 		// this.image = Game.instance.assets['res/deadUnicornV001.jpg'];
 
-        gameOverLabel = new Label("Tap to Restart!");
-        gameOverLabel.x = (browserWidth/2)-150;
-        gameOverLabel.y = (browserHeight/2)-120;
-        gameOverLabel.color = 'black';
-        gameOverLabel.font = '32px Impact';
-        gameOverLabel.textAlign = 'center';
 
         scoreLabel = new Label('SCORE:   ' + score);
         scoreLabel.x = (game.width/2)-150;
-        scoreLabel.y = 100;        
+        scoreLabel.y = 60;        
         scoreLabel.color = 'black';
         scoreLabel.font = '25px Impact';
         scoreLabel.textAlign = 'center';
 
 		unicornGameOver = new UnicornGameOver();
+		unicornGameOver.x = 285;
+		unicornGameOver.y = 150;
 
 		this.addChild(unicornGameOver);
-        this.addChild(gameOverLabel);
         this.addChild(scoreLabel);
 
         this.addEventListener(Event.TOUCH_START, this.touchToRestart);
