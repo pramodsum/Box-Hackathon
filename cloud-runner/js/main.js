@@ -12,7 +12,6 @@ window.onload = function() {
     game.preload(
                  'res/unicornSheetV1.png',
                  'res/drive.png',
-				 'res/unicornGameOver.png',
                  'res/Hit.mp3',
                  'res/bgm.mp3',
 				 'res/deadUnicornV001.jpg');
@@ -168,7 +167,7 @@ var SceneGame = Class.create(Scene, {
 var UnicornGameOver = Class.create (Sprite, {
 	initialize: function() {
 		Sprite.apply(this,[browserWidth,browserHeight]);
-		this.image = Game.instance.assets['res/deadUnicornV001.jpg'];
+		// this.image = Game.instance.assets['res/deadUnicornV001.jpg'];
 	}
 });
 
