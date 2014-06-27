@@ -10,7 +10,7 @@ window.onload = function() {
 	//var game = new Game(440, 320);
 	var game = new Game(browserWidth, browserHeight);
     game.preload(//'res/BG.png',
-				 'res/newBGV001.jpg',
+				 'res/newBGV001.png',
                  'res/unicornSheetV1.png',
                  'res/drive.png',
 				 'res/unicornGameOver.png',
