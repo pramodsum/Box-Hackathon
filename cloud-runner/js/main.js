@@ -45,11 +45,11 @@ var SceneGame = Class.create(Scene, {
         // Access to the game singleton instance
         game = Game.instance;
  
-        label = new Label('SCORE: <br>0');
-        label.x = game.width/2-130;
-        label.y = 32;        
+        label = new Label('SCORE:   0');
+        label.x = game.width/2-150;
+        label.y = 50;        
         label.color = 'white';
-        label.font = '16px strong';
+        label.font = '25px Impact';
         label.textAlign = 'center';
         label._style.textShadow ="-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black";
         this.scoreLabel = label;        
@@ -134,7 +134,7 @@ var SceneGame = Class.create(Scene, {
 
     setScore: function (value) {
         this.score = value;
-        this.scoreLabel.text = 'SCORE<br>' + this.score;
+        this.scoreLabel.text = 'SCORE:   ' + this.score;
     }
 });
 
@@ -163,7 +163,7 @@ var SceneGame = Class.create(Scene, {
     },
 
     switchToLaneNumber: function(lane){  
-        var targetY = 300 - this.height/2 + (lane-1)*170;
+        var targetY = 300 - this.height/2 + (lane-1)*150;
         this.y = targetY;
     }
 });
@@ -226,18 +226,18 @@ var SceneGameOver = Class.create(Scene, {
         this.backgroundColor = 'black';
 		this.image = Game.instance.assets['res/deadUnicornV001.jpg'];
 
-        gameOverLabel = new Label("GAME OVER<br><br>Tap to Restart");
+        gameOverLabel = new Label("Tap to Restart!");
         gameOverLabel.x = (game.width/2)-150;
-        gameOverLabel.y = (game.height/2)-100;
+        gameOverLabel.y = (game.height/2)-120;
         gameOverLabel.color = 'white';
-        gameOverLabel.font = '32px strong';
+        gameOverLabel.font = '32px Impact';
         gameOverLabel.textAlign = 'center';
 
-        scoreLabel = new Label('SCORE<br>' + score);
+        scoreLabel = new Label('SCORE:   ' + score);
         scoreLabel.x = (game.width/2)-150;
         scoreLabel.y = 50;        
         scoreLabel.color = 'white';
-        scoreLabel.font = '16px strong';
+        scoreLabel.font = '25px Impact';
         scoreLabel.textAlign = 'center';
 
 		unicornGameOver = new UnicornGameOver();
