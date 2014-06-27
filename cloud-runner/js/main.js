@@ -219,7 +219,6 @@ var SceneGameOver = Class.create(Scene, {
         var gameOverLabel, scoreLabel, unicornGameOver, game;
 		game = Game.instance;
         Scene.apply(this);
-        this.backgroundColor = 'black';
 		// this.image = Game.instance.assets['res/deadUnicornV001.jpg'];
 
         gameOverLabel = new Label("Tap to Restart!");
