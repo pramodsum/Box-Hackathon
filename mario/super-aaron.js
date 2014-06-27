@@ -124,7 +124,7 @@ Q.Sprite.extend("Enemy",{
 //enemy that goes up and down
 Q.Sprite.extend("VerticalEnemy", {
     init: function(p) {
-        this._super(p, {vy: -100, rangeY: 200, gravity: 0 });
+        this._super(p, {sheet: 'enemy', vy: -100 });
         this.add("2d, aiBounce, commonEnemy");           
         this.p.initialY = this.p.y;  
 
