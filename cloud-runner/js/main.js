@@ -77,6 +77,7 @@ var SceneGame = Class.create(Scene, {
         this.score = 0;
 
         this.bgm = game.assets['res/bgm.mp3']; // Add this line
+        this.bgm = game.assets['res/bgm.ogg']; // Add this line
  
         // Start BGM
         this.bgm.play();
