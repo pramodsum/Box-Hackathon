@@ -180,7 +180,7 @@ Q.scene("level1",function(stage) {
   stage.insert(new Q.Enemy({ x: 600, y: 0 }));
   stage.insert(new Q.Enemy({ x: 700, y: 0 }));
   stage.insert(new Q.VerticalEnemy({x: 800, y: 120, rangeY: 70, asset: "fly.png" }));
-  stage.insert(new Q.VerticalEnemy({x: 200, y: 120, rangeY: 70, asset: "fly.png" }));
+  stage.insert(new Q.VerticalEnemy({x: 250, y: 120, rangeY: 70, asset: "fly.png" }));
   stage.insert(new Q.Enemy({ x: 400, y: 0 }));
   stage.insert(new Q.Enemy({ x: 500, y: 0 }));
 
