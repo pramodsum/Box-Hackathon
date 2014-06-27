@@ -8,7 +8,7 @@ window.onload = function() {
     // Starting point
     //var game = new Game(320, 440);
 	//var game = new Game(440, 320);
-	var game = new Game(browserWidth, browserHeight-50);
+	var game = new Game(browserWidth, browserHeight);
     game.preload(
                  'res/unicornSheetV1.png',
                  'res/unicorn.gif',
