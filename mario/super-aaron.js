@@ -135,6 +135,8 @@ Q.scene("level1",function(stage) {
   // Add in a couple of enemies
   stage.insert(new Q.Enemy({ x: 700, y: 0 }));
   stage.insert(new Q.Enemy({ x: 800, y: 0 }));
+  stage.insert(new Q.VerticalEnemy({x: 800, y: 120, rangeY: 70, asset: "fly.png" }));
+  stage.insert(new Q.VerticalEnemy({x: 800, y: 120, rangeY: 70, asset: "fly.png" }));
 
   // Finally add in the tower goal
   stage.insert(new Q.Tower({ x: 180, y: 50 }));
