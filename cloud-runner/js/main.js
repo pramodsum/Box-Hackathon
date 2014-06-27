@@ -8,7 +8,7 @@ window.onload = function() {
     // Starting point
     //var game = new Game(320, 440);
 	//var game = new Game(440, 320);
-	var game = new Game(browserWidth, browserHeight);
+	var game = new Game(browserWidth, browserHeight-50);
     game.preload(
                  'res/unicornSheetV1.png',
                  'res/drive.png',
@@ -52,7 +52,7 @@ var SceneGame = Class.create(Scene, {
         label._style.textShadow ="-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black";
         this.scoreLabel = label;        
  
-        bg = new Sprite(browserWidth, browserHeight);
+        bg = new Sprite(browserWidth, browserHeight-50);
 
         unicorn = new Unicorn();
         unicorn.y = game.height/2 - unicorn.height/2;
@@ -167,7 +167,7 @@ var SceneGame = Class.create(Scene, {
 
 var UnicornGameOver = Class.create (Sprite, {
 	initialize: function() {
-		Sprite.apply(this,[browserWidth,browserHeight]);
+		Sprite.apply(this,[browserWidth,browserHeight-50]);
 		this.image = Game.instance.assets['res/deadUnicornV001.jpg'];
 	}
 });
