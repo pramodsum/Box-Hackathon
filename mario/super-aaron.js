@@ -97,18 +97,21 @@ Q.Sprite.extend("Enemy",{
     });
   }
 });
-
+        
+//enemy that goes up and down
 Q.Sprite.extend("VerticalEnemy", {
     init: function(p) {
         this._super(p, {vy: -100, rangeY: 200, gravity: 0 });
-        this.add("2d");
-        
+        this.add("2d, commonEnemy");                
         this.p.initialY = this.p.y;
-        
-        //TODO: check for player collisions, die or kill accordingly
     },
     step: function(dt) {                
-        //TODO: update range movement within the game loop
+        if(this.p.y - this.p.initialY >= this.p.rangeY && this.p.vy > 0) {
+            this.p.vy = -this.p.vy;
+        } 
+        else if(-this.p.y + this.p.initialY >= this.p.rangeY && this.p.vy < 0) {
+            this.p.vy = -this.p.vy;
+        } 
     }
 });
 
@@ -170,7 +173,7 @@ Q.scene('endGame',function(stage) {
 // Q.load can be called at any time to load additional assets
 // assets that are already loaded will be skipped
 // The callback will be triggered when everything is loaded
-Q.load("sprites.png, sprites.json, level.json, tiles.png, background-wall.png", function() {
+Q.load("sprites.png, sprites.json, level.json, fly.png, tiles.png, background-wall.png", function() {
   // Sprites sheets can be created manually
   Q.sheet("tiles","tiles.png", { tilew: 32, tileh: 32 });
 
