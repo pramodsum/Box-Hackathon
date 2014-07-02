@@ -120,41 +120,6 @@ Q.Sprite.extend("Enemy",{
     });
   }
 });
-        
-//enemy that goes up and down
-Q.Sprite.extend("VerticalEnemy", {
-    init: function(p) {
-        this._super(p, {vy: -100, gravity: 0 });
-        this.add("2d, aiBounce, commonEnemy");           
-        this.p.initialY = this.p.y;  
-
-        // Listen for a sprite collision, if it's the player,
-        // end the game unless the enemy is hit on top
-        this.on("bump.left,bump.right,bump.bottom",function(collision) {
-          if(collision.obj.isA("Player")) { 
-            Q.stageScene("endGame",1, { label: "You Died" }); 
-            collision.obj.destroy();
-          }
-        });
-
-        // If the enemy gets hit on the top, destroy it
-        // and give the user a "hop"
-        this.on("bump.top",function(collision) {
-          if(collision.obj.isA("Player")) { 
-            this.destroy();
-            collision.obj.p.vy = -300;
-          }
-        });
-    },
-    step: function(dt) {                
-        if(this.p.y - this.p.initialY >= this.p.rangeY && this.p.vy > 0) {
-            this.p.vy = -this.p.vy;
-        } 
-        else if(-this.p.y + this.p.initialY >= this.p.rangeY && this.p.vy < 0) {
-            this.p.vy = -this.p.vy;
-        } 
-    }
-});
 
 // ## Level1 scene
 // Create a new scene called level 1
@@ -179,8 +144,8 @@ Q.scene("level1",function(stage) {
   // Add in a couple of enemies
   stage.insert(new Q.Enemy({ x: 600, y: 0 }));
   stage.insert(new Q.Enemy({ x: 700, y: 0 }));
-  stage.insert(new Q.VerticalEnemy({x: 800, y: 120, rangeY: 70, asset: "fly.png" }));
-  stage.insert(new Q.VerticalEnemy({x: 250, y: 120, rangeY: 70, asset: "fly.png" }));
+  stage.insert(new Q.Enemy({ x: 800, y: 0 }));
+  stage.insert(new Q.Enemy({ x: 250, y: 0 }));
   stage.insert(new Q.Enemy({ x: 400, y: 0 }));
   stage.insert(new Q.Enemy({ x: 500, y: 0 }));
 
@@ -216,7 +181,7 @@ Q.scene('endGame',function(stage) {
 // Q.load can be called at any time to load additional assets
 // assets that are already loaded will be skipped
 // The callback will be triggered when everything is loaded
-Q.load("sprites.png, sprites.json, level.json, fly.png, tiles.png, background-wall.png", function() {
+Q.load("sprites.png, sprites.json, level.json, tiles.png, background-wall.png", function() {
   // Sprites sheets can be created manually
   Q.sheet("tiles","tiles.png", { tilew: 32, tileh: 32 });
 
