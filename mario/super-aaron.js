@@ -181,12 +181,14 @@ Q.scene('endGame',function(stage) {
 // Q.load can be called at any time to load additional assets
 // assets that are already loaded will be skipped
 // The callback will be triggered when everything is loaded
-Q.load("sprites.png, sprites.json, level.json, tiles.png, background-wall.png", function() {
+Q.load("player.png, player.json, tower.png, tower.json, enemy.png, enemy.json, level.json, tiles.png, background-wall.png", function() {
   // Sprites sheets can be created manually
   Q.sheet("tiles","tiles.png", { tilew: 32, tileh: 32 });
 
   // Or from a .json asset that defines sprite locations
-  Q.compileSheets("sprites.png","sprites.json");
+  Q.compileSheets("player.png","player.json");
+  Q.compileSheets("tower.png","tower.json");
+  Q.compileSheets("enemy.png","enemy.json");
 
   // Finally, call stageScene to run the game
   Q.stageScene("level1");
