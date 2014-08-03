@@ -1411,125 +1411,90 @@ function restart() {
     }, 380, createjs.Ease.sineInOut)
 }
 
-  var LEADERBOARD_SIZE = 5;
-
-  // Build some firebase references.
-  var rootRef = new Firebase('https://box-arcade.firebaseio.com//scoreList');
-  var scoreListRef = rootRef.child("scoreList");
-  var highestScoreRef = rootRef.child("highestScore");
-
-  // Keep a mapping of firebase locations to HTML elements, so we can move / remove elements as necessary.
-  var htmlForPath = {};
-
-  // Helper function that takes a new score snapshot and adds an appropriate row to our leaderboard table.
-  function handleScoreAdded(scoreSnapshot, prevScoreName) {
-    var newScoreRow = $("<tr/>");
-    newScoreRow.append($("<td/>").append($("<em/>").text(scoreSnapshot.val().name)));
-    newScoreRow.append($("<td/>").text(scoreSnapshot.val().score));
-
-    // Store a reference to the table row so we can get it again later.
-    htmlForPath[scoreSnapshot.name()] = newScoreRow;
-
-    // Insert the new score in the appropriate place in the table.
-    if (prevScoreName === null) {
-      $("#leaderboardTable").append(newScoreRow);
-    }
-    else {
-      var lowerScoreRow = htmlForPath[prevScoreName];
-      lowerScoreRow.before(newScoreRow);
-    }
-  }
-
-  // Helper function to handle a score object being removed; just removes the corresponding table row.
-  function handleScoreRemoved(scoreSnapshot) {
-    var removedScoreRow = htmlForPath[scoreSnapshot.name()];
-    removedScoreRow.remove();
-    delete htmlForPath[scoreSnapshot.name()];
-  }
-
-  // Create a view to only receive callbacks for the last LEADERBOARD_SIZE scores
-  var scoreListView = scoreListRef.limit(LEADERBOARD_SIZE);
-
-  // Add a callback to handle when a new score is added.
-  scoreListView.on('child_added', function (newScoreSnapshot, prevScoreName) {
-    handleScoreAdded(newScoreSnapshot, prevScoreName);
-  });
-
-  // Add a callback to handle when a score is removed
-  scoreListView.on('child_removed', function (oldScoreSnapshot) {
-    handleScoreRemoved(oldScoreSnapshot);
-  });
-
-  // Add a callback to handle when a score changes or moves positions.
-  var changedCallback = function (scoreSnapshot, prevScoreName) {
-    handleScoreRemoved(scoreSnapshot);
-    handleScoreAdded(scoreSnapshot, prevScoreName);
-  };
-  scoreListView.on('child_moved', changedCallback);
-  scoreListView.on('child_changed', changedCallback);
-
-  // When the user presses enter on scoreInput, add the score, and update the highest score.
-  $("#scoreInput").keypress(function (e) {
-    if (e.keyCode == 13) {
-      var newScore = Number($("#scoreInput").val());
-      var name = $("#nameInput").val();
-      $("#scoreInput").val("");
-
-      if (name.length === 0)
-        return;
-
-      var userScoreRef = scoreListRef.child(name);
-
-      // Use setWithPriority to put the name / score in Firebase, and set the priority to be the score.
-      userScoreRef.setWithPriority({ name:name, score:newScore }, newScore);
-
-      // Track the highest score using a transaction.  A transaction guarantees that the code inside the block is
-      // executed on the latest data from the server, so transactions should be used if you have multiple
-      // clients writing to the same data and you want to avoid conflicting changes.
-      highestScoreRef.transaction(function (currentHighestScore) {
-        if (currentHighestScore === null || newScore > currentHighestScore) {
-          // The return value of this function gets saved to the server as the new highest score.
-          return newScore;
-        }
-        // if we return with no arguments, it cancels the transaction.
-        return;
-      });
-    }
-  });
-
-  // Add a callback to the highest score in Firebase so we can update the GUI any time it changes.
-  highestScoreRef.on('value', function (newHighestScore) {
-    $("#highestScoreDiv").text(newHighestScore.val());
-  });
-
 function updateLeaderboard(email) { 
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if(re.test(email)) {
-      var newScore = Number(counter.text);
-      var name = $("#nameInput").val();
-        
-        
-      if (name.length === 0)
-        return;
-
-      var userScoreRef = scoreListRef.child(name);
-
-      // Use setWithPriority to put the name / score in Firebase, and set the priority to be the score.
-      userScoreRef.setWithPriority({ name:name, score:newScore }, newScore);
-
-      // Track the highest score using a transaction.  A transaction guarantees that the code inside the block is
-      // executed on the latest data from the server, so transactions should be used if you have multiple
-      // clients writing to the same data and you want to avoid conflicting changes.
-      highestScoreRef.transaction(function (currentHighestScore) {
-        if (currentHighestScore === null || newScore > currentHighestScore) {
-          // The return value of this function gets saved to the server as the new highest score.
-          return newScore;
-        }
-        // if we return with no arguments, it cancels the transaction.
-        return;
-      });
+        var ref = new Firebase('https://box-arcade.firebaseio.com/contestants/');
+        var contestants = $firebase(ref);
+        contestants.$asArray().$add(email, score);
     }
 }
+
+$("#submitScore").submit(function(evt){
+    if($(this).find('#emailInput').val() == ""){
+        $('#gameOverModal').addClass('animated shake');
+        evt.preventDefault();
+    }
+    else {
+        $('#gameOverModal-3').modal('hide'); //in-case is showing
+    }
+});
+
+var app = angular.module('leaderboard', ['firebase']);
+
+app.controller('MainCtrl', ['$scope', 'ContestantsService', '$firebase', function ($scope, ContestantsService, $firebase) {
+
+    $scope.newContestant = { email: '', name: '', score: '' };
+    $scope.currentContestant = null;
+
+    // Explicit
+    $scope.contestants = ContestantsService.getContestants();
+
+    $scope.addContestant = function () {
+        ContestantsService.addContestant(angular.copy($scope.newContestant));
+        $scope.newContestant = { lane: '', name: '', score: '' };
+    };
+
+    $scope.updateContestant = function (contestant) {
+        ContestantsService.updateContestant(contestant);
+    };
+
+    $scope.removeContestant = function (contestant) {
+        ContestantsService.removeContestant(contestant);
+    };
+
+    $scope.incrementScore = function () {
+        $scope.currentContestant.score = parseInt($scope.currentContestant.score, 10) + 1;
+        $scope.updateContestant($scope.currentContestant);
+    };
+
+    $scope.decrementScore = function () {
+        $scope.currentContestant.score = parseInt($scope.currentContestant.score, 10) - 1;
+        $scope.updateContestant($scope.currentContestant);
+    };
+}]);
+
+app.factory('ContestantsService', ['$firebase', function ($firebase) {
+    var ref = new Firebase('https://box-arcade.firebaseio.com/contestants/');
+    var contestants = $firebase(ref);
+
+    contestants.$on('loaded', function(){
+        // console.log('contestants', contestants);
+    })
+
+    var getContestants = function() {
+        return contestants;
+    }
+
+    var addContestant = function (contestant) {
+        contestants.$add(contestant);
+    };
+
+    var updateContestant = function (id) {
+        contestants.$save(id);
+    };
+
+    var removeContestant = function (id) {
+        contestants.$remove(id);
+    };
+
+    return {
+        getContestants: getContestants,
+        addContestant: addContestant,
+        updateContestant: updateContestant,
+        removeContestant: removeContestant
+    }
+}]);
 
 function die() {
     $("canvas").trigger("gameEnd");
@@ -1546,7 +1511,10 @@ function die() {
         }
     }
 
-    $('#gameOverModal').modal('show');
+    $('#gameOverModal').modal({
+        backdrop:'static', 
+        show: true
+    });
 }
 
 function removeStart() {
@@ -1661,3 +1629,54 @@ function tick(event) {
     }
     stage.update(event)
 }
+var apiUrl = "social.flappybird.io";
+var rootUrl = "flappybird.io";
+
+function retreiveScore() {
+    var hash = location.hash.substring(1);
+    $.post("http://" + apiUrl + "/leaderboard/show/" + hash, {}, function(data) {
+        $(".score").html(data.count)
+    }, "json")
+}
+
+function submitScore() {
+    ga("send", "event", "Flappy Bird", "Score Time", counter.text + " - " + rd, rd);
+    $.post("http://" + apiUrl + "/leaderboard/", {
+        s: counter.text,
+        t: rd
+    }, function(data) {
+        console.log(data);
+        window.location = "http://" + rootUrl + "/leaderboard/new/#" + data.token
+    }, "json")
+}
+
+function updateScore(name) {
+    var hash = location.hash.substring(1);
+    $.post("http://" + apiUrl + "/leaderboard/update/" + hash, {
+        name: name
+    }, function(data) {
+        if (data.success) {
+            $(".error").hide();
+            window.location = "http://" + rootUrl + "/leaderboard/"
+        } else {
+            $(".error").show().text(data.message);
+            ga("send", "event", "Flappy Bird", "Name", name)
+        }
+    }, "json")
+}
+
+function listScores() {
+    $.post("http://" + apiUrl + "/leaderboard/list", {}, function(data) {
+        $(".loading").remove();
+        for (var i = 0; i < data.day.length; i++) {
+            var element = $("<tr><td></td><td>" + data.day[i].count + "</td></tr>");
+            element.children("td").eq(0).text(data.day[i].name);
+            $(".day").append(element)
+        }
+        for (var i = 0; i < data.hour.length; i++) {
+            var element = $("<tr><td></td><td>" + data.hour[i].count + "</td></tr>");
+            element.children("td").eq(0).text(data.hour[i].name);
+            $(".hour").append(element)
+        }
+    }, "json")
+};
