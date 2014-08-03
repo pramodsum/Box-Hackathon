@@ -33,7 +33,7 @@ app.controller('MainCtrl', ['$scope', 'ContestantsService', '$firebase', functio
 }]);
 
 app.factory('ContestantsService', ['$firebase', function ($firebase) {
-    var ref = new Firebase('https://box-arcade.firebaseio.com/');
+    var ref = new Firebase('https://box-arcade.firebaseio.com/contestants/');
     var contestants = $firebase(ref);
 
     contestants.$on('loaded', function(){
