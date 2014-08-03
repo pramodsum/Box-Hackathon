@@ -287,10 +287,10 @@ Screen - Game
 {
    position: absolute;
    opacity: 0;
-   top: 205px;
-   left: 61px;
-   height: 115px;
-   width: 70px;
+   top: 95px;
+   left:250px;
+   height: 100px;
+   width: 50px;
    cursor: pointer;
 }
 
