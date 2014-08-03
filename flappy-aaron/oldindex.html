@@ -1,21 +1,22 @@
 <!DOCTYPE html>
-<!-- saved from url=(0021)http://flappybird.io/ -->
-<html class="no-js"><!--<![endif]-->
-  <head>
+<html class="no-js" ng-app="leaderboard"><!--<![endif]-->
+  <head>    
+    <!-- Style sheets -->
+    <link href="css/reset.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+      
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 
     <!-- Optional theme -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
     <!-- Latest compiled and minified JavaScript -->
     <script src="libs/jquery.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Box Arcade</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="http://staging.flappybird.io/assets/app-c77d11cf36a401a7679b32e53dc0c5b1.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/custom.css">
     <script src="js/create.min.js"></script><style type="text/css"></style>
 
     <!-- AngularJS -->
@@ -25,20 +26,13 @@
     <!-- AngularFire -->
     <script src="https://cdn.firebase.com/libs/angularfire/0.8.0/angularfire.min.js"></script>
 
-    <script src="app.js"></script>
-    <script type="text/javascript">
-        var outerPadding = 0
-        $(function() {
-            init()
-            $( "canvas" ).on( "gameEnd", function(e) {
-                console.log('game over')
-            });
-            $( "canvas").trigger( "gameEnd");
-
-        })
-    </script>
+    <!-- Metadata -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Box Arcade</title>
   </head>
-  <body>
+
+  <body ng-controller="MainCtrl">
     <!-- Static navbar -->
     <div class="navbar navbar-default" role="navigation">
       <div class="container-fluid">
@@ -60,68 +54,77 @@
         </div><!--/.nav-collapse -->
       </div><!--/.container-fluid -->
     </div>
-
-    <center>
-      <h4><strong>Current High Score: </strong></h4>
-      <div class="row">
-        <div class="col-md-6">
-          <canvas id="testCanvas" width="768" height="1024"> </canvas>
-        </div>
-        <div class="col-md-6">
-          <h4><strong>Leaderboard</strong></h4>
-          <table class="table">
-              <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Score</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr ng-repeat="(id, contestant) in contestants">
-                    <td>{{contestant.name}}</td>
-                    <td>{{contestant.email}}</td>
-                    <td>{{contestant.score}}</td>
-                </tr>
-              </tbody>
-          </table>
-        </div>
+      <div id="gamecontainer">
+         <div id="gamescreen">
+            <div id="sky" class="animated">
+               <div id="flyarea">
+                  <div id="ceiling" class="animated"></div>
+                  <!-- This is the flying and pipe area container -->
+                  <div id="player" class="bird animated"></div>
+                  
+                  <div id="bigscore"></div>
+                  
+                  <div id="splash"></div>
+                  
+                  <div id="scoreboard">
+                     <div id="medal"></div>
+                     <div id="currentscore"></div>
+                     <div id="highscore"></div>
+                     <div id="replay"><img src="assets/replay.png" alt="replay"></div>
+                  </div>
+                  
+                  <!-- Pipes go here! -->
+               </div>
+            </div>
+            <div id="land" class="animated"><div id="debug"></div></div>
+         </div>
       </div>
-    </center>
-    <br>
+      
+      <div class="boundingbox" id="playerbox"></div>
+      <div class="boundingbox" id="pipebox"></div>
+      
+      <script src="js/jquery.min.js"></script>
+      <script src="js/jquery.transit.min.js"></script>
+      <script src="js/buzz.min.js"></script>
+      <script src="js/main.js"></script>
 
     <!-- gameOverModal -->
-    <div class="modal fade" id="gameOverModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="gameOverModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
       <div class="modal-dialog modal-dialog-center">
         <div class="modal-content">
-          <form role="form" onSubmit='updateLeaderboard(); alertError();'>
+          <form role="form" id="submitScore">
             <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
               <h4 class="modal-title" id="myModalLabel">Modal title</h4>
             </div>
             <div class="modal-body">
               <div class="form-group">
                 <div class="input-group">
                   <div class="input-group-addon">@</div>
-                  <input class="form-control" type="email" placeholder="Enter email">
+                  <input id="emailInput" class="form-control" type="email" placeholder="Enter email">
                 </div>
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
               <button type="submit" class="btn btn-primary">Submit</button>
             </div>
           </form>
         </div>
       </div>
     </div>
+      
+    <div id="footer">
+     <a href="http://www.dotgears.com/">original game/concept/art by dong nguyen</a>
+    </div>
 
-    <script src="libs/jquery.min.js"></script>
-    <script src="libs/bootstrap.min.js"></script>
-    <script src="libs/sugar.custom.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
     <script src="https://cdn.firebase.com/v0/firebase.js"></script>
     <script src="https://cdn.firebase.com/libs/angularfire/0.5.0-rc1/angularfire.js"></script>
-    <script src="js/leader-board.js"></script>
+    <script src="libs/bootstrap.min.js"></script>
+    <script src="libs/sugar.custom.js"></script>
+    <script src="js/leaderboard.js"></script>
+    <script src="js/buzz.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="lib/jquery.min.js"></script>
+    <script src="lib/jquery.transit.min.js"></script>
   </body>
 </html>

@@ -1411,6 +1411,25 @@ function restart() {
     }, 380, createjs.Ease.sineInOut)
 }
 
+function updateLeaderboard(email) { 
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if(re.test(email)) {
+        var ref = new Firebase('https://box-arcade.firebaseio.com/contestants/');
+        var contestants = $firebase(ref);
+        contestants.$asArray().$add(email, score);
+    }
+}
+
+$("#submitScore").submit(function(evt){
+    if($(this).find('#emailInput').val() == ""){
+        $('#gameOverModal').addClass('animated shake');
+        evt.preventDefault();
+    }
+    else {
+        $('#gameOverModal-3').modal('hide'); //in-case is showing
+    }
+});
+
 var app = angular.module('leaderboard', ['firebase']);
 
 app.controller('MainCtrl', ['$scope', 'ContestantsService', '$firebase', function ($scope, ContestantsService, $firebase) {
@@ -1432,6 +1451,16 @@ app.controller('MainCtrl', ['$scope', 'ContestantsService', '$firebase', functio
 
     $scope.removeContestant = function (contestant) {
         ContestantsService.removeContestant(contestant);
+    };
+
+    $scope.incrementScore = function () {
+        $scope.currentContestant.score = parseInt($scope.currentContestant.score, 10) + 1;
+        $scope.updateContestant($scope.currentContestant);
+    };
+
+    $scope.decrementScore = function () {
+        $scope.currentContestant.score = parseInt($scope.currentContestant.score, 10) - 1;
+        $scope.updateContestant($scope.currentContestant);
     };
 }]);
 
@@ -1467,22 +1496,6 @@ app.factory('ContestantsService', ['$firebase', function ($firebase) {
     }
 }]);
 
-function updateLeaderboard(email) { 
-    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if(re.test(email)) {
-
-    }
-}
-
-function updateLeaderboard(email) { 
-    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if(re.test(email)) {
-        var ref = new Firebase('https://box-arcade.firebaseio.com/contestants/');
-        var contestants = $firebase(ref);
-        contestants.$asArray().$add(email, score);
-    }
-}
-
 function die() {
     $("canvas").trigger("gameEnd");
     dead = true;
@@ -1498,7 +1511,10 @@ function die() {
         }
     }
 
-    $('#gameOverModal').modal('show');
+    $('#gameOverModal').modal({
+        backdrop:'static', 
+        show: true
+    });
 }
 
 function removeStart() {
