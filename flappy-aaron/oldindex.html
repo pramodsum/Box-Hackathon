@@ -89,7 +89,23 @@
       <script src="js/main.js"></script>
       
     <div id="footer">
-     <a href="http://www.dotgears.com/">original game/concept/art by dong nguyen</a>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Lane</th>
+                <th>Contestant</th>
+                <th>Score</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="(id, contestant) in contestants">
+                <td>{{contestant.lane}}</td>
+                <td>{{contestant.name}}</td>
+                <td>{{contestant.score}}</td>
+            </tr>
+            </tbody>
+        </table>
+        <a href="http://www.dotgears.com/">original game/concept/art by dong nguyen</a>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>

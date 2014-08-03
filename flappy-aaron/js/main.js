@@ -33,6 +33,7 @@ var jump = -4.6;
 
 var score = 0;
 var highscore = 0;
+var email = "";
 
 var pipeheight = 90;
 var pipewidth = 52;
@@ -496,3 +497,16 @@ var isIncompatible = {
    return (isIncompatible.Android() || isIncompatible.BlackBerry() || isIncompatible.iOS() || isIncompatible.Opera() || isIncompatible.Safari() || isIncompatible.Windows());
    }
 };
+
+$("#submitScore").submit(function(evt){
+    if($(this).find('#emailInput').val() == ""){
+        $('#gameOverModal').addClass('animated shake');
+        evt.preventDefault();
+    }
+    else {
+        $('#gameOverModal').modal('hide'); //in-case is showing
+   
+       //start with the splash screen
+       showSplash();
+    }
+});

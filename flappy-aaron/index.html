@@ -1,23 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<!--
-   Copyright 2014 Nebez Briefkani
-   floppybird - index.html
-
-   Licensed under the Apache License, Version 2.0 (the "License");
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
--->
-
-   <head>
+    <head>
       <title>Floppy Bird</title>
       <meta http-equiv="content-type" content="text/html; charset=utf-8" />
       
@@ -27,13 +10,15 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
       
-      <!-- Style sheets -->
-      <link href="css/reset.css" rel="stylesheet">
-      <link href="css/main.css" rel="stylesheet">
-<!--      <link href="css/custom.css" rel="stylesheet">-->
-      <link href="css/animate.css" rel="stylesheet">
+    <!-- Style sheets -->
+    <link href="css/reset.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/leaderboard.css" rel="stylesheet" />
+    <link href="css/animate.css" rel="stylesheet">
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular.min.js"></script>
    </head>
-   <body>
+    
+   <body ng-controller="leaderboard">
     <!-- Static navbar -->
     <div class="navbar navbar-default" role="navigation" style="z-index: 2">
       <div class="container-fluid">
@@ -78,7 +63,26 @@
               <!-- Pipes go here! -->
            </div>
         </div>
-        <div id="land" class="animated"><div id="debug"></div></div>
+        <div id="land" class="animated">
+            <div id="debug"></div>
+            <div class="leaderboard">
+                <center><h2>Leaderboard</h2></center>
+                <table class="table" ng-app="" >
+                    <thead>
+                        <tr>
+                            <th><center>Email</center></th>
+                            <th><center>Score</center></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="(id, contestant) in contestants">
+                            <td><center>{{contestant.name}}</center></td>
+                            <td><center>{{contestant.score}}</center></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+         </div>
      </div>
     </div>
     <div id="footer">
@@ -115,5 +119,14 @@
     <script src="js/jquery.transit.min.js"></script>
     <script src="js/buzz.min.js"></script>
     <script src="js/main.js"></script>
+
+    <script src="libs/jquery.min.js"></script>
+    <script src="libs/bootstrap.min.js"></script>
+    <script src="libs/sugar.custom.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
+    <script src="https://cdn.firebase.com/v0/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/0.5.0-rc1/angularfire.js"></script>
+
+    <script src="js/leaderboard.js"></script>
    </body>
 </html>

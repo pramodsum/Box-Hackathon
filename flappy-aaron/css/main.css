@@ -243,7 +243,7 @@ Screen - Game
    z-index: 1000;
 }
 
-#medal
+#medal, #emailInput
 {
    position: absolute;
    opacity: 0;
@@ -389,6 +389,23 @@ Screen - Game
    left: 3px;
 }
 
+@font-face {
+    font-family:"Flappy Bird";
+    src:url(/fonts/FB.eot);
+    src:url(/fonts/FB.eot?#iefix) format("embedded-opentype"),url(/fonts/FB.woff) format("woff"),url(/fonts/FB.ttf) format("truetype"),url(/fonts/FB.svg#04b_19regular) format("svg");
+    font-weight:400;
+    font-style:normal;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Flappy Bird";
+    font: "Flappy Bird";
+}
+
+#land .leaderboard {
+    margin-top: 25px;
+}
+
 #footer a,
 #footer a:link,
 #footer a:visited,
@@ -399,4 +416,14 @@ Screen - Game
    padding: 2px;
    text-decoration: none;
    color: #fff;
+}
+
+#gameOverModal {
+    position: fixed;
+    margin-top: 25% !important;
+    right: 25%;
+    left: 25%;
+/*    width: 400px;*/
+    outline: none;
+    z-index: 5;
 }
