@@ -1,0 +1,16 @@
+{
+  "cloudRunner" : {
+    "Sumedha" : {
+      ".priority" : 1.0,
+      "name" : "sumedha.pramod@gmail.com",
+      "score" : 1
+    }
+  }
+  "flappyBoxCopter" : {
+    "Sumedha" : {
+      ".priority" : 1.0,
+      "name" : "sumedha.pramod@gmail.com",
+      "score" : 1
+    }
+  }
+}
