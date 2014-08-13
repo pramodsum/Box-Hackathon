@@ -1414,9 +1414,9 @@ function restart() {
   var LEADERBOARD_SIZE = 5;
 
   // Build some firebase references.
-  var rootRef = new Firebase('https://box-arcade.firebaseio.com//scoreList');
-  var scoreListRef = rootRef.child("scoreList");
-  var highestScoreRef = rootRef.child("highestScore");
+  var rootRef = new Firebase('https://box-arcade.firebaseio.com/');
+  var scoreListRef = rootRef.child("flappyAaron");
+  var highestScoreRef = scoreListRef.child("highestScore");
 
   // Keep a mapping of firebase locations to HTML elements, so we can move / remove elements as necessary.
   var htmlForPath = {};
@@ -1468,46 +1468,17 @@ function restart() {
   scoreListView.on('child_moved', changedCallback);
   scoreListView.on('child_changed', changedCallback);
 
-  // When the user presses enter on scoreInput, add the score, and update the highest score.
-  $("#scoreInput").keypress(function (e) {
-    if (e.keyCode == 13) {
-      var newScore = Number($("#scoreInput").val());
-      var name = $("#nameInput").val();
-      $("#scoreInput").val("");
-
-      if (name.length === 0)
-        return;
-
-      var userScoreRef = scoreListRef.child(name);
-
-      // Use setWithPriority to put the name / score in Firebase, and set the priority to be the score.
-      userScoreRef.setWithPriority({ name:name, score:newScore }, newScore);
-
-      // Track the highest score using a transaction.  A transaction guarantees that the code inside the block is
-      // executed on the latest data from the server, so transactions should be used if you have multiple
-      // clients writing to the same data and you want to avoid conflicting changes.
-      highestScoreRef.transaction(function (currentHighestScore) {
-        if (currentHighestScore === null || newScore > currentHighestScore) {
-          // The return value of this function gets saved to the server as the new highest score.
-          return newScore;
-        }
-        // if we return with no arguments, it cancels the transaction.
-        return;
-      });
-    }
-  });
-
   // Add a callback to the highest score in Firebase so we can update the GUI any time it changes.
   highestScoreRef.on('value', function (newHighestScore) {
-    $("#highestScoreDiv").text(newHighestScore.val());
+    $("#topScore").text(newHighestScore.val());
   });
 
 function updateLeaderboard(email) { 
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if(re.test(email)) {
       var newScore = Number(counter.text);
-      var name = $("#nameInput").val();
-        
+      var name = email;
+      console.log("email is correctly formatted: " + email);
         
       if (name.length === 0)
         return;
@@ -1515,7 +1486,7 @@ function updateLeaderboard(email) {
       var userScoreRef = scoreListRef.child(name);
 
       // Use setWithPriority to put the name / score in Firebase, and set the priority to be the score.
-      userScoreRef.setWithPriority({ name:name, score:newScore }, newScore);
+      userScoreRef.setWithPriority({ name:email, score:newScore }, newScore);
 
       // Track the highest score using a transaction.  A transaction guarantees that the code inside the block is
       // executed on the latest data from the server, so transactions should be used if you have multiple
@@ -1529,7 +1500,12 @@ function updateLeaderboard(email) {
         return;
       });
     }
+    else {
+      console.log("email is NOT correctly formatted: " + email);
+    }
 }
+
+$('#submit').onclick = updateLeaderboard($('#email').val());
 
 function die() {
     $("canvas").trigger("gameEnd");

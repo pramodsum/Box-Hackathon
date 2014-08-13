@@ -15,9 +15,8 @@
       
         <script type="text/javascript" src="https://cdn.firebase.com/v0/firebase.js"></script>
         <meta charset="utf-8">
+        <script src="js/gameover.js"></script>  
         <title>Cloud Runner</title>    
-        <script src="js/lib/enchant.js"></script>     
-        <script src="js/main.js"></script>  
     </head>
     <body>
         
@@ -42,8 +41,40 @@
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
       </div>
-        
-	<div id ="gamecontainer"></div>
+    
+    <center>
+        <img src="./res/unicorn-gameover.png" class="img-responsive"/><br>
+        <div class="container"> 
+            <div id="gameOverModal" style="max-width: 500px" class="panel panel-primary" >
+                <div class="panel-heading">
+                    <h2 class="panel-title"><strong>Submit Score to Leaderboard</strong></h2>
+                </div>
+                <form role="form">
+                    <div class="panel-body">
+                        <p>
+                            <strong>Current High Score: </strong>
+                            <span id="topScore"></span><br>
+                            <strong>My Score: </strong>
+                            <span id="currentScore"></span>
+                        </p>
+                        
+                        <p class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon">@</div>
+                                <input id="email" class="form-control" type="email" placeholder="Enter email">
+                            </div>
+                        </p>
+                    </div>
+                    
+                    <div id="leaderboardTable"></div>
+                    
+                    <div class="modal-footer">
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </center>
         
     </body>
 </html>

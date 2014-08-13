@@ -7,7 +7,7 @@ window.onload = function() {
 
     // Starting point
     //var game = new Game(320, 440);
-	//var game = new Game(440, 320);
+//	var game = new Game(440, 320);
 	var game = new Game(browserWidth, browserHeight);
     game.preload(
                  'res/unicornSheetV1.png',
@@ -116,10 +116,11 @@ var SceneGame = Class.create(Scene, {
             if(drive.intersect(this.unicorn)){  
                 var game;
                 game = Game.instance;
+                localStorage["CR_Score"] = this.score;
                 game.assets['res/Hit.mp3'].play();                    
                 this.driveGroup.removeChild(drive);
                 this.bgm.stop();
-                game.replaceScene(new SceneGameOver(this.score));        
+                game.replaceScene(new SceneGameOver(this.score));  
                 break;
             }
         }
@@ -161,16 +162,17 @@ var SceneGame = Class.create(Scene, {
     },
 
     switchToLaneNumber: function(lane){  
-        var targetY = 300 - this.height/2 + (lane-1)*165;
-        this.y = targetY;
+        var game, distance;
+        game = Game.instance;        
+        distance = 170;
+        this.y = game.height/2 - this.height/2 + (lane - 1) * distance;
     }
 });
 
 var UnicornGameOver = Class.create (Sprite, {
 	initialize: function() {
-		Sprite.apply(this,[576,340]);
-		this.image = Game.instance.assets['res/unicorn-gameover.png'];
-		}
+        window.open("gameOver.html","_self");
+    }
 });
 
 var Drive = Class.create(Sprite, {
@@ -202,7 +204,7 @@ var Drive = Class.create(Sprite, {
         var ySpeed, game;
      
         game = Game.instance;
-        ySpeed = 300;
+        ySpeed = 400;
      
         this.x -= ySpeed * evt.elapsed * 0.001;
         this.rotation += this.rotationSpeed * evt.elapsed * 0.001;           
@@ -247,4 +249,4 @@ var SceneGameOver = Class.create(Scene, {
         var game = Game.instance;
         game.replaceScene(new SceneGame());
     }
-});
+}); 

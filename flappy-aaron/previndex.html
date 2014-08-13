@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <title>Flappy Aaron</title>
+      <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+      
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+      
+    <!-- Style sheets -->
+    <link href="css/reset.css" rel="stylesheet">
+<!--    <link href="css/main.css" rel="stylesheet">-->
+    <link href="css/animate.css" rel="stylesheet">
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular.min.js"></script>
+        
+	<link href='http://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
+	<script type='application/javascript' src="fastclick.js"></script>
+	<script type="application/javascript" src="fb.min.js"></script>
+   </head>
+    
+   <body ng-controller="leaderboard">
+    <!-- Static navbar -->
+    <div class="navbar navbar-default" role="navigation" style="z-index: 2">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../index.html">Box Arcade</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="../mario/index.html">Super Aaron</a></li>
+            <li><a href="#">Flappy Aaron</a></li>
+            <li><a href="../cloud-runner/index.html">Cloud Runner</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div><!--/.container-fluid -->
+    </div>
+    
+       
+	<canvas id="canvas">你的浏览器太老了 =_=||</canvas>
+	<div id="easy" class="option" style="box-shadow:0 0 0 2px #165CF3">easy</div>
+	<div id="normal" class="option">normal</div>
+	<div id="hard" class="option">hard</div>
+
+    <a href="https://github.com/quietshu/FlappyBird"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
+       
+    <div id="footer">
+     <a href="http://www.dotgears.com/">original game/concept/art by dong nguyen</a>
+    </div>
+    <div class="boundingbox" id="playerbox"></div>
+    <div class="boundingbox" id="pipebox"></div>
+       
+    <!-- gameOverModal -->
+    <div class="modal fade" id="gameOverModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+      <div class="modal-dialog modal-dialog-center">
+        <div class="modal-content">
+          <form role="form" id="submitScore">
+            <div class="modal-header">
+              <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-addon">@</div>
+                  <input id="emailInput" class="form-control" type="email" placeholder="Enter email">
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+       
+       
+
+<script type="text/javascript">
+  var LEADERBOARD_SIZE = 5;
+
+  // Build some firebase references.
+  var rootRef = new Firebase('https://example.firebaseio-demo.com/leaderboard');
+  var scoreListRef = rootRef.child("scoreList");
+  var highestScoreRef = rootRef.child("highestScore");
+
+  // Keep a mapping of firebase locations to HTML elements, so we can move / remove elements as necessary.
+  var htmlForPath = {};
+
+  // Helper function that takes a new score snapshot and adds an appropriate row to our leaderboard table.
+  function handleScoreAdded(scoreSnapshot, prevScoreName) {
+    var newScoreRow = $("<tr/>");
+    newScoreRow.append($("<td/>").append($("<em/>").text(scoreSnapshot.val().name)));
+    newScoreRow.append($("<td/>").text(scoreSnapshot.val().score));
+
+    // Store a reference to the table row so we can get it again later.
+    htmlForPath[scoreSnapshot.name()] = newScoreRow;
+
+    // Insert the new score in the appropriate place in the table.
+    if (prevScoreName === null) {
+      $("#leaderboardTable").append(newScoreRow);
+    }
+    else {
+      var lowerScoreRow = htmlForPath[prevScoreName];
+      lowerScoreRow.before(newScoreRow);
+    }
+  }
+
+  // Helper function to handle a score object being removed; just removes the corresponding table row.
+  function handleScoreRemoved(scoreSnapshot) {
+    var removedScoreRow = htmlForPath[scoreSnapshot.name()];
+    removedScoreRow.remove();
+    delete htmlForPath[scoreSnapshot.name()];
+  }
+
+  // Create a view to only receive callbacks for the last LEADERBOARD_SIZE scores
+  var scoreListView = scoreListRef.limit(LEADERBOARD_SIZE);
+
+  // Add a callback to handle when a new score is added.
+  scoreListView.on('child_added', function (newScoreSnapshot, prevScoreName) {
+    handleScoreAdded(newScoreSnapshot, prevScoreName);
+  });
+
+  // Add a callback to handle when a score is removed
+  scoreListView.on('child_removed', function (oldScoreSnapshot) {
+    handleScoreRemoved(oldScoreSnapshot);
+  });
+
+  // Add a callback to handle when a score changes or moves positions.
+  var changedCallback = function (scoreSnapshot, prevScoreName) {
+    handleScoreRemoved(scoreSnapshot);
+    handleScoreAdded(scoreSnapshot, prevScoreName);
+  };
+  scoreListView.on('child_moved', changedCallback);
+  scoreListView.on('child_changed', changedCallback);
+
+  // When the user presses enter on scoreInput, add the score, and update the highest score.
+  $("#scoreInput").keypress(function (e) {
+    if (e.keyCode == 13) {
+      var newScore = Number($("#scoreInput").val());
+      var name = $("#nameInput").val();
+      $("#scoreInput").val("");
+
+      if (name.length === 0)
+        return;
+
+      var userScoreRef = scoreListRef.child(name);
+
+      // Use setWithPriority to put the name / score in Firebase, and set the priority to be the score.
+      userScoreRef.setWithPriority({ name:name, score:newScore }, newScore);
+
+      // Track the highest score using a transaction.  A transaction guarantees that the code inside the block is
+      // executed on the latest data from the server, so transactions should be used if you have multiple
+      // clients writing to the same data and you want to avoid conflicting changes.
+      highestScoreRef.transaction(function (currentHighestScore) {
+        if (currentHighestScore === null || newScore > currentHighestScore) {
+          // The return value of this function gets saved to the server as the new highest score.
+          return newScore;
+        }
+        // if we return with no arguments, it cancels the transaction.
+        return;
+      });
+    }
+  });
+
+  // Add a callback to the highest score in Firebase so we can update the GUI any time it changes.
+  highestScoreRef.on('value', function (newHighestScore) {
+    $("#highestScoreDiv").text(newHighestScore.val());
+  });
+
+</script>
+
+    <script type="text/javascript" src="ui/lib/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="ui/lib/coffee-script.js"></script>
+    <script type="text/coffeescript" src="ui/bird.js.coffee"></script>
+
+    <script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#uuid=a3b1e297-3f5c-4229-bb55-e938e9072078&style=-1"></script>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.transit.min.js"></script>
+    <script src="js/buzz.min.js"></script>
+    <script src="js/main.js"></script>
+
+    <script src="libs/bootstrap.min.js"></script>
+    <script src="libs/sugar.custom.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
+    <script src="https://cdn.firebase.com/v0/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/0.5.0-rc1/angularfire.js"></script>
+
+    <script src="js/leaderboard.js"></script>
+   </body>
+</html>
