@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<!-- saved from url=(0021)http://flappybird.io/ -->
+<html class="no-js"><!--<![endif]-->
+  <head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="libs/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Box Arcade</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://staging.flappybird.io/assets/app-c77d11cf36a401a7679b32e53dc0c5b1.css">
+    <script src="js/create.min.js"></script><style type="text/css"></style>
+
+    <script src="js/leader-board.js"></script>
+    <script src="app.js"></script>
+    <script type="text/javascript">
+        var outerPadding = 0
+        $(function() {
+            init()
+            $( "canvas" ).on( "gameEnd", function(e) {
+                console.log('game over')
+            });
+            $( "canvas").trigger( "gameEnd");
+
+        })
+    </script>
+  </head>
+  <body>
+    <!-- Static navbar -->
+    <div class="navbar navbar-default" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../index.html">Box Arcade</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="../mario/index.html">Super Aaron</a></li>
+            <li><a href="#">Flappy Aaron</a></li>
+            <li><a href="../cloud-runner/index.html">Cloud Runner</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div><!--/.container-fluid -->
+    </div>
+
+    <center>
+      <h4><strong>Current High Score: </strong></h4>
+      <table id="leaderboardTable"></table>
+      <div class="row" ng-app="leaderboard">
+        <div class="col-md-6">
+          <canvas id="testCanvas" width="768" height="1024"> </canvas>
+        </div>
+        <div class="col-md-6">
+          <h4><strong>Leaderboard</strong></h4>
+          <table class="table" ng-controller="MainCtrl">
+              <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Score</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="(id, contestant) in contestants">
+                    <td>{{contestant.name}}</td>
+                    <td>{{contestant.email}}</td>
+                    <td>{{contestant.score}}</td>
+                </tr>
+              </tbody>
+          </table>
+        </div>
+      </div>
+    </center>
+    <br>
+
+    <!-- gameOverModal -->
+    <div class="modal fade" id="gameOverModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-center">
+        <div class="modal-content">
+          <form role="form" onSubmit='updateLeaderboard(); alertError();'>
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+              <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-addon">@</div>
+                  <input class="form-control" type="email" placeholder="Enter email">
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="libs/jquery.min.js"></script>
+    <script src="libs/bootstrap.min.js"></script>
+    <script src="libs/sugar.custom.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
+    <script src="https://cdn.firebase.com/v0/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/0.5.0-rc1/angularfire.js"></script>
+  </body>
+</html>

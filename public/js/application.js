@@ -15,4 +15,7 @@
 
 //= require lib/jquery-2.1.1.min
 //= require lib/bootstrap.min
+//= require lib/enchant
+//= require lib/modernizr.min
+//= require lib/sugar.custom
 //= require main
