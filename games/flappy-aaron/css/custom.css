@@ -5,6 +5,14 @@ body {
 /*    margin-bottom: 100px;*/
 }
 
+* {
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: -moz-none;
+    -o-user-select: none;
+    user-select: none;
+}
+
 body a:link {
     color: #999999;
 }
@@ -348,10 +356,4 @@ body {
 h1, h2, h3, h4, h5, h6 {
     font-family: "Flappy Bird";
     font: "Flappy Bird";
-}
-
-#gameOverModal {
-    top: 5%;
-    right: 50%;
-    outline: none;
 }
