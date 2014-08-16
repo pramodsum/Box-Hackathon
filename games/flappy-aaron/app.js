@@ -272,7 +272,6 @@ function die() {
     stage.addChild(counter, counterOutline, highScore, highScoreOutline);
     dropIn(score);
     dropIn(start);
-    dropIn(leaderboard);
     dropIn(counter);
     dropIn(counterOutline);
     dropIn(highScore);
