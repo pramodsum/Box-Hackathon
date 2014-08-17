@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html style="background: white">
+  <head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Box Arcade</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://staging.flappybird.io/assets/app-c77d11cf36a401a7679b32e53dc0c5b1.css">
+    <link rel="stylesheet" href="../../themes/modern.css">
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <script src="js/create.min.js"></script>
+	<script src="js/preload.js"></script>
+    <script src="app.js"></script>
+    <script src="https://cdn.firebase.com/js/client/1.0.19/firebase.js"></script>
+    <script src="js/leaderboard.js"></script>
+      
+    <link rel="icon" type="image/png" href="../../joystick-25.png">
+  </head>
+  <body style="background: white;">
+      
+    <!-- Static navbar -->
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" data-toggle="collapse" data-target=".navbar-collapse" class="navbar-toggle">
+              <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">Box Arcade
+            </a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Flappy Boxer Copter</a></li>
+            <li><a href="../cloud-runner">Cloud Runner</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <center>
+      <h4><strong>Current High Score: </strong><span id="highestScoreDiv"></span></h4>
+      <div class="row" ng-app="leaderboard">
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+          <canvas id="testCanvas"> </canvas>
+        </div>
+        <div class="col-md-5">
+          <p>
+            <div class="example-base example-leaderboard l-demo-container">
+              <h4><strong>Current High Score: </strong><span id="highestScoreDiv"></span></h4>
+              <hr>
+              <h4><strong>Leaderboard</strong></h4>
+              <table id="leaderboardTable">
+                <tr>
+                  <th>Player</th>
+                  <th>Email</th>
+                  <th>Score</th>
+                </tr>
+              </table>
+            </div>
+          </p>
+        <button class="btn">Change User</button>
+      </div>
+    </center>
+    <br>
+
+    <script src="libs/jquery.min.js"></script>
+    <script src="libs/bootstrap.min.js"></script>
+    <script src="libs/sugar.custom.js"></script>
+  </body>
+    
+    <footer>
+      <div class="container text-center">
+        <p class="pull-left">© 2014 Company, Inc. All Rights Reserved</p>
+        <ul class="pull-right list-inline">
+          <li><a href="https://github.com/sahat/hackathon-starter"><span class="ion-fork-repo"></span>Box Hackathon</a></li>
+          <li><a href="https://github.com/pramodsum">Sumedha Pramod</a>, Ashwin Raman, Evan Thomas</li>
+        </ul>
+      </div>
+    </footer>
+</html>
