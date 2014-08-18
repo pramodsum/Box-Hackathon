@@ -22,8 +22,8 @@ function init() {
     document.onkeydown = handleKeyDown;
     stage = new createjs.Stage("testCanvas");
     createjs.Touch.enable(stage);
-    stage.canvas.height = canvasHeight;
-    stage.canvas.width = canvasWidth;
+//    stage.canvas.height = canvasHeight;
+//    stage.canvas.width = canvasWidth;
     w = stage.canvas.width;
     h = stage.canvas.height;
     manifest = [{

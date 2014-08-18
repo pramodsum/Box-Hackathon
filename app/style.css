@@ -72,7 +72,7 @@ body {
 }
 
 footer {
-  position: fixed;
+/*  position: fixed;*/
   bottom: 0;
   width: 100%;
   height: 45px;
@@ -82,6 +82,10 @@ footer {
   ul {
     margin-bottom: 0;
   }
+}
+
+footer a:visited {
+  color: #fda700;
 }
 
 // Navbar

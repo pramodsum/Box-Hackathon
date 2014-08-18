@@ -102,7 +102,7 @@ a.pure-button-primary {
     /* Fixed menus normally have a border at the bottom. */
     border-bottom: none;
     /* I need a higher z-index here because of the scroll-over effect. */
-    z-index: 4;
+/*    z-index: 4;*/
 }
 
 .home-menu .pure-menu-heading {
@@ -133,7 +133,7 @@ a.pure-button-primary {
 
 .splash-container {
     background: #1f8dd6;
-    z-index: 1;
+/*    z-index: 1;*/
     overflow: hidden;
     /* The following styles are required for the "scroll-over" effect */
     width: 100%;
@@ -222,7 +222,7 @@ footer {
 /* This is the class used for the footer */
 .footer {
     background: #111;
-    z-index: 5;
+/*    z-index: 5;*/
 }
 
 /*
