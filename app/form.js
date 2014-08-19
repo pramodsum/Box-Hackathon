@@ -49,8 +49,8 @@ function store(){
         $( validationAlert ).insertBefore( "#logo" );
         $("#name").effect("shake");
     } else {
-        var href = window.location.href.split('/');
-        var baseUrl = href[0]+'//'+href[2]+'/';
-        window.location = baseUrl + "games/";
+//        var href = window.location.href.split('/');
+//        var baseUrl = href[0]+'//'+href[2]+'/';
+        window.location = "./games/";
     }
 }
