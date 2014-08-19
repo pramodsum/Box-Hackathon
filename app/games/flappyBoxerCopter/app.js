@@ -12,6 +12,7 @@ var pipeDelay = masterPipeDelay;
 var restartable = false;
 var rd = 0;
 var counterShow = false;
+var name, email;
  
 var canvasWidth = window.innerWidth || document.body.clientWidth;
 //canvasWidth ;
@@ -121,6 +122,8 @@ function handleComplete() {
         } else {
             localStorage.setItem("highScore", 0)
         }
+        name = localStorage.getItem('name');
+        email = localStorage.getItem('email');
     } else {
         var myCookie = document.cookie.replace(/(?:(?:^|.*;\s*)highScore\s*\=\s*([^;]*).*$)|^.*$/, "$1");
         if (myCookie) {
@@ -129,6 +132,10 @@ function handleComplete() {
         } else {
             document.cookie = "highScore=0"
         }
+        var cookie = docCookies.getItem('box_arcade');
+        var splitCookie = cookie.split('||~||');
+        name = splitCookie[0];
+        email = splitCookie[1];
     }
 }
 
@@ -280,8 +287,6 @@ function die() {
     }, 400, createjs.Ease.sineIn).call(addClickToStart)
 
     //Update user score
-    var email = localStorage['email'];
-    var name = localStorage['name'];
     var newScore = counter.text;
 
     var rootRef = new Firebase('https://flappyboxercopter.firebaseio.com/');
