@@ -1,0 +1,36 @@
+.container-full {
+    padding: 95px 50px;
+}
+
+.game-header {
+    max-height: 50%;
+}
+
+.game-body {
+    max-height: 50%;
+}
+
+h1 {
+    color: #121212;
+    font-size: 7em;
+    padding: 0;
+    margin: 0.25em 0;
+}
+
+body {
+    background: white;
+}
+
+/* This is the class used for the footer */
+footer {
+    color: #fff;
+    background-color: #121212;
+    position: fixed;
+    padding: 0 20px;
+    bottom: 0px;
+}
+
+.box-logo {
+    max-width: 450px;
+    height: auto;
+}
