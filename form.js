@@ -83,7 +83,7 @@ function store(){
         docCookies.setItem('box_arcade', storeValue);
     }
     
-    var validationAlert = '<div id="alert"><a class="alert" href="/">Are you sure you filled out that form right? Might want to double check that!</a></div>';
+    var validationAlert = '<div id="alert"><a class="alert" href="./">Are you sure you filled out that form right? Might want to double check that!</a></div>';
     
     if(!validEmail(inputEmail.value)) {
         $( validationAlert ).insertBefore( "#logo" );
