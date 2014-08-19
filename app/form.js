@@ -59,6 +59,15 @@ var docCookies = {
   }
 };
 
+function supports_html5_storage() {
+    try {
+        localStorage.setItem("test", "foo");
+        return "localStorage" in window && window.localStorage !== null
+    } catch (e) {
+        return false
+    }
+}
+
 function store(){
     var inputName= document.getElementById("name");
     console.log(localStorage.getItem('name'));
