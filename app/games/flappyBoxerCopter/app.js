@@ -229,15 +229,6 @@ function die() {
     dead = true;
     bird.gotoAndPlay("dive");
     
-//    apiUrl = 'flappyboxercopter.firebaseio.com';
-//    $.post("https://flappyboxercopter.firebaseio.com/scoreboard.json", {
-//        'score': counter.text,
-//        'name': rd
-//    }, function(data) {
-//        console.log(data);
-////        window.location = "http://" + rootUrl + "/leaderboard/new/#" + data.token
-//    }, "json")
-    
     if (counter.text > highScore.text) {
         highScore.text = counter.text;
         highScoreOutline.text = counterOutline.text;
@@ -303,8 +294,11 @@ function die() {
 //        scoreListRef.setWithPriority({ fullname: name, email:email, score:newScore }, newScore);
 //    }
 
-      if (name.length === 0)
-        return;
+      if (name.length === 0 || !name || email.length === 0 || !email) {
+            window.location = '../../';
+            alert('Name and email required to play games!');
+      }
+          
 
       var userScoreRef = scoreListRef.child(name);
 
