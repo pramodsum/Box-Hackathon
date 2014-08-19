@@ -1,15 +1,5 @@
 @import url(http://fonts.googleapis.com/css?family=Antic+Slab);
 
-html {
-  height:100%;
-  background-color: #333;
-}
-
-body {
-  height: 100%;
-  background-color: #333;
-}
-
 @font-face {
     font-family:'Flappy Bird';
     src:url("/games/flappyBoxerCopter/fonts/FB.eot");
@@ -23,9 +13,11 @@ body {
         format("svg");font-weight:normal;font-style:normal;
 }
 
+html,body { height:100%; }
+
 h1 {
   font-family:'Flappy Bird';
-  font-size:80px;
+  font-size:2em;
   color:white;
 }
 
@@ -67,6 +59,7 @@ html {
 }
 
 body {
+  background: #1f8dd6;
   padding-top: 60px;
   margin-bottom: 75px;
 }
@@ -122,9 +115,24 @@ img .nav-icon {
 }
 
 footer {
+    position: absolute;
     padding: 0 20px;
+    bottom: -50px;
 }
 
 nav { 
   background: rgba(255, 255, 255, 0.1)
+}
+
+.content {
+    background: white;
+}
+
+.box-logo {
+    max-width: 70%;
+    height: auto;
+}
+
+.splash h1 {
+    font-size: 7em;
 }
