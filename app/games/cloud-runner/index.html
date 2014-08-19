@@ -18,12 +18,14 @@
     <link rel="stylesheet" type="text/css" href="custom.css">
         <script src="js/lib/enchant.js"></script>     
         <script src="js/main.js"></script>  
+        <script src="js/leaderboard.js"></script>
         <link rel="icon" type="image/png" href="joystick-25.png">
+        <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
     </head>
     <body>
-    
     <script> 
-        if(!localStorage['email'] || !localStorage['name']) {
+        if(!localStorage['email'] || !localStorage['name'] || localStorage['email'] == '' || localStorage['name'] == '') {
+            console.log('USER DETAILS INCOMPLETE');
             window.location = '../../';
             alert('Name and email required to play games!');
         }
@@ -52,7 +54,14 @@
         </div><!--/.container-fluid -->
       </div>
         
-	<div id ="gamecontainer"></div>
+    <script>
+        $('.unicorn').hide();
+    </script>
+        
+	<div id ="gamecontainer">
+<!--        <div class="scoreCounter">Score: <span id="score"></span></div>-->
+        <img id="unicorn" class="img-responsive unicorn" src="res/unicorn-gameover.png" />
+    </div>
         
     </body>
 <!--

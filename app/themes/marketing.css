@@ -152,7 +152,10 @@ a.pure-button-primary {
     left: 0; right: 0; top: 5%;
 /*    top: 100px; left: 0; bottom: 0; right: 0;*/
     text-align: center;
-    text-transform: uppercase;
+}
+
+.splash h1 {
+    text-transform: uppercase;   
 }
 
 /* This is the main heading that appears on the blue section */

@@ -39,6 +39,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <link rel="stylesheet" href="style.css">
 <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+<script src="form.js"></script>
 <link rel="icon" type="image/png" href="joystick-25.png">
 <title>Box Arcade</title>
 </head>
@@ -46,7 +47,7 @@
     
 <div class="splash-container">
     <div class="splash">
-        <img class="box-logo" src="./box_white.png"/>         
+        <img id="logo" class="box-logo" src="./box_white.png"/>         
         <h1>Arcade</h1>
     </div>
 </div>
@@ -67,30 +68,6 @@
         <br>
     </div>
 </div>
-    <script type="text/javascript">
-        function store(){
-            var inputName= document.getElementById("name");
-            localStorage.setItem("name", inputName.value);
-            console.log(localStorage.getItem('name'));
-            
-            var inputEmail= document.getElementById("email");
-            localStorage.setItem("email", inputEmail.value);
-            console.log(localStorage.getItem('email'));
-            
-            if(!inputEmail.value && !inputName.value) {
-                $("#email").effect("shake");
-                $("#name").effect("shake");
-            } else if(!inputEmail.value) {
-                $("#email").effect("shake");
-            } else if(!inputName.value) {
-                $("#name").effect("shake");
-            } else {
-                var href = window.location.href.split('/');
-                var baseUrl = href[0]+'//'+href[2]+'/';
-                window.location = baseUrl + "games/";
-            }
-        }
-    </script>
 </body>
     
     <footer class="footer navbar-fixed-bottom">

@@ -6,3 +6,10 @@ body {
 #gamecontainer {
     margin-top: 50px;
 }
+
+.unicorn {
+    margin: auto;   
+    margin-top: 20%;
+    z-index: 5;
+    display: none;
+}

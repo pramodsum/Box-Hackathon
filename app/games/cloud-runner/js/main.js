@@ -46,7 +46,7 @@ var SceneGame = Class.create(Scene, {
         game = Game.instance;
         label = new Label('SCORE:   0');
         label.x = game.width/2-150;
-        label.y = 50;        
+        label.y = 60;        
         label.color = 'black';
         label.font = '25px Impact';
         label.textAlign = 'center';
@@ -169,11 +169,11 @@ var SceneGame = Class.create(Scene, {
     }
 });
 
-var UnicornGameOver = Class.create (Sprite, {
-	initialize: function() {
-        window.open("gameOver.html","_self");
-    }
-});
+//var UnicornGameOver = Class.create (Sprite, {
+//	initialize: function() {
+//        window.open("gameOver.html","_self");
+//    }
+//});
 
 var Drive = Class.create(Sprite, {
     /**
@@ -215,6 +215,13 @@ var Drive = Class.create(Sprite, {
     }
 });
 
+var UnicornGameOver = Class.create (Sprite, {
+	initialize: function() {
+		Sprite.apply(this,[576,340]);
+		this.image = Game.instance.assets['res/unicorn-gameover.png'];
+		}
+});
+
 /**
  * SceneGameOver  
  */
@@ -225,19 +232,16 @@ var SceneGameOver = Class.create(Scene, {
         Scene.apply(this);
 		// this.image = Game.instance.assets['res/deadUnicornV001.jpg'];
 
-
         scoreLabel = new Label('SCORE:   ' + score);
         scoreLabel.x = (game.width/2)-150;
         scoreLabel.y = 60;        
         scoreLabel.color = 'black';
         scoreLabel.font = '25px Impact';
         scoreLabel.textAlign = 'center';
-
-		unicornGameOver = new UnicornGameOver();
-		unicornGameOver.x = 285;
-		unicornGameOver.y = 150;
-
-		this.addChild(unicornGameOver);
+        
+        document.images.unicorn.style.display = 'block!important';
+        console.log('game over');
+        
         this.addChild(scoreLabel);
 
         this.addEventListener(Event.TOUCH_START, this.touchToRestart);

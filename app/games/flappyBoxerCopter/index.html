@@ -54,7 +54,7 @@
     <script> 
         if(!localStorage['email'] || !localStorage['name'] || localStorage['email'] == '' || localStorage['name'] == '') {
             console.log('USER DETAILS INCOMPLETE');
-            window.location = '../../';
+            window.open("../../","_self");
             alert('Name and email required to play games!');
         }
     </script>
