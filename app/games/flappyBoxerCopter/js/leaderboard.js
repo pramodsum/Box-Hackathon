@@ -5,6 +5,8 @@
   var scoreListRef = rootRef.child("scoreboard");
   var highestScoreRef = rootRef.child("highestScore");
 
+  
+
   // Keep a mapping of firebase locations to HTML elements, so we can move / remove elements as necessary.
   var htmlForPath = {};
 
