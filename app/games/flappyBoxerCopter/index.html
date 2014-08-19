@@ -27,6 +27,12 @@
     <link rel="icon" type="image/png" href="../../joystick-25.png">
   </head>
   <body style="background: white;">
+    <script> 
+        if(!localStorage['email'] || !localStorage['name']) {
+            window.location = '../../';
+            alert('Name and email required to play games!');
+        }
+    </script>
       
     <!-- Static navbar -->
     <div class="navbar navbar-default navbar-fixed-top">
@@ -77,7 +83,6 @@
       </div>
     </center>
     <br>
-
     <script src="libs/jquery.min.js"></script>
     <script src="libs/bootstrap.min.js"></script>
     <script src="libs/sugar.custom.js"></script>

@@ -38,6 +38,7 @@
     
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <link rel="stylesheet" href="style.css">
+<script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
 <link rel="icon" type="image/png" href="joystick-25.png">
 <title>Box Arcade</title>
 </head>
@@ -58,7 +59,7 @@
                     <fieldset>
                         <input id="name" class="form-control pure-input-1-2 pure-input-rounded" type="text" placeholder="Full Name" required >
                         <input id="email" class="form-control pure-input-1-2 pure-input-rounded" type="email" placeholder="Enter your email address" required >
-                        <button class="pure-button" type="button" onclick="store()">OK</button>
+                        <button id="submit" class="pure-button" type="button" onclick="store()">OK</button>
                     </fieldset>
                 </form>
             </div>
@@ -76,9 +77,18 @@
             localStorage.setItem("email", inputEmail.value);
             console.log(localStorage.getItem('email'));
             
-            var href = window.location.href.split('/');
-            var baseUrl = href[0]+'//'+href[2]+'/';
-            window.location = baseUrl + "games/";
+            if(!inputEmail.value && !inputName.value) {
+                $("#email").effect("shake");
+                $("#name").effect("shake");
+            } else if(!inputEmail.value) {
+                $("#email").effect("shake");
+            } else if(!inputName.value) {
+                $("#name").effect("shake");
+            } else {
+                var href = window.location.href.split('/');
+                var baseUrl = href[0]+'//'+href[2]+'/';
+                window.location = baseUrl + "games/";
+            }
         }
     </script>
 </body>

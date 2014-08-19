@@ -21,6 +21,13 @@
         <link rel="icon" type="image/png" href="joystick-25.png">
     </head>
     <body>
+    
+    <script> 
+        if(!localStorage['email'] || !localStorage['name']) {
+            window.location = '../../';
+            alert('Name and email required to play games!');
+        }
+    </script>
         
       <!-- Static navbar -->
       <div class="navbar navbar-default" role="navigation">

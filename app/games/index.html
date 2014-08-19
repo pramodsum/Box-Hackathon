@@ -47,6 +47,13 @@
 </head>
 <body>
     
+    <script> 
+        if(!localStorage['email'] || !localStorage['name']) {
+            window.location = '../';
+            alert('Name and email required to play games!');
+        }
+    </script>
+    
       <!-- Static navbar -->
     <div class="navbar navbar-default navbar-fixed-top">
       <div class="container">
