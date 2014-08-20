@@ -95,7 +95,7 @@ function store(){
         $( validationAlert ).insertBefore( "#logo" );
         $("#email").effect("shake");
         $("#name").effect("shake");
-    } else if(!inputEmail.value) {
+    } else if(!inputEmail.value || !validEmail(inputEmail.value)) {
         $( validationAlert ).insertBefore( "#logo" );
         $("#email").effect("shake");
     } else if(!inputName.value) {

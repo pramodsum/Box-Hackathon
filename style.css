@@ -2,14 +2,14 @@
 
 @font-face {
     font-family:'Flappy Bird';
-    src:url("/games/flappyBoxerCopter/fonts/FB.eot");
-    src:url("/games/flappyBoxerCopter/fonts/FB.eot?#iefix") 
+    src:url("/fonts/FB.eot");
+    src:url("/fonts/FB.eot?#iefix") 
         format("embedded-opentype"),
-            url("/games/flappyBoxerCopter/fonts/FB.woff")
+            url("/fonts/FB.woff")
         format("woff"),
-            url("/games/flappyBoxerCopter/fonts/FB.ttf")
+            url("/fonts/FB.ttf")
         format("truetype"),
-            url("/games/flappyBoxerCopter/fonts/FB.svg#04b_19regular") 
+            url("/fonts/FB.svg#04b_19regular") 
         format("svg");font-weight:normal;font-style:normal;
 }
 
