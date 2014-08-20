@@ -128,6 +128,7 @@ body
    font-family: monospace;
    font-size: 12px;
    color: #fff;
+   background: #ded895;
 }
 
 #gamecontainer
@@ -151,9 +152,9 @@ Screen - Game
 #sky
 {
    position: absolute;
-   top: 0;
+   top: 65px;
    width: 100%;
-   height: 80%;
+   height: 420px;
    background-image: url('../assets/sky.png');
    background-repeat: repeat-x;
    background-position: 0px 100%;
@@ -187,7 +188,7 @@ Screen - Game
 #land
 {
    position: absolute;
-   bottom: 0;
+   top: 420px;
    width: 100%;
    height: 20%;
    background-image: url('../assets/land.png');
@@ -371,21 +372,66 @@ Screen - Game
    background-image: url('../assets/pipe-up.png');
 }
 
-#footer
-{
-   position: absolute;
-   bottom: 3px;
-   left: 3px;
+table {
+    -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    border-radius: 5px;
+    background-color: white;
+    overflow: auto;
+    color: #666;
+    z-index: 15;
+    border-radius: 3px;
+    margin-bottom: 20px;
+    width: 100%;
+    border-collapse: collapse;
 }
 
-#footer a,
-#footer a:link,
-#footer a:visited,
-#footer a:hover,
-#footer a:active
-{
-   display: block;
-   padding: 2px;
-   text-decoration: none;
-   color: #fff;
+table th {
+    background: #EEE;
+    border-bottom: 1px solid #CCC;
+    font-size: 12px;
+    color: #999;
+    padding: 5px 10px;
+    text-align: left;
+}
+
+table td {
+    border-bottom: 1px solid #EEE;
+    padding: 10px;
+    color: #28a562;
+}
+
+table td em {
+    font-style: normal;
+    font-weight: bold;
+    color: #666;
+}
+
+table tr:first-child td {
+    background: green;
+}
+
+input {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    padding: 0px 10px;
+    height: 30px;
+    font-size: 18px;
+    font-weight: normal;
+    outline: none;
+    border: 1px solid #CCC;
+}
+
+input.example-leaderboard-name {
+    width: 100%;
+    margin-right: 10px;
+}
+
+input.example-leaderboard-score {
+    width: 100%;
 }
