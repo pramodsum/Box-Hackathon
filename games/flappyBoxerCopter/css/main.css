@@ -131,6 +131,10 @@ body
    background: #ded895;
 }
 
+.navbar {
+    text-align: center;
+}
+
 #gamecontainer
 {
    position: relative;
@@ -391,4 +395,10 @@ table {
 footer {
     background: #333;
     z-index: 5;
+}
+
+.btn {
+    margin-top: 8px;
+  color: white;
+  background: #E86101;
 }
