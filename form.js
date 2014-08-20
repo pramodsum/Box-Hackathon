@@ -1,3 +1,10 @@
+if (supports_html5_storage()) {
+    localStorage.setItem("name", null);
+    localStorage.setItem("email", null);
+} else {
+    docCookies.setItem('box_arcade', null);
+}
+
 function validEmail(emailAddress) {
   var sQtext = '[^\\x0d\\x22\\x5c\\x80-\\xff]';
   var sDtext = '[^\\x0d\\x5b-\\x5d\\x80-\\xff]';

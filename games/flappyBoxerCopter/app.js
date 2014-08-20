@@ -293,27 +293,20 @@ function die() {
     var scoreListRef = rootRef.child("scoreboard");
     var highestScoreRef = rootRef.child("highestScore");
     var userScoreRef = scoreListRef.child(name);
+
+    if (name.length === 0 || !name || email.length === 0 || !email) {
+        window.location = '../../';
+        alert('Name and email required to play games!');
+    }
+
+    var userScoreRef = scoreListRef.child(name);
+
     // Use setWithPriority to put the name / score in Firebase, and set the priority to be the score.
-//    scoreListRef.push({ fullname: name, email:email, score:newScore });
-//    if(newScore > userScoreRef.val().score) {
-//        scoreListRef.setWithPriority({ fullname: name, email:email, score:newScore }, newScore);
-//    }
-
-      if (name.length === 0 || !name || email.length === 0 || !email) {
-            window.location = '../../';
-            alert('Name and email required to play games!');
-      }
-          
-
-      var userScoreRef = scoreListRef.child(name);
-
-      // Use setWithPriority to put the name / score in Firebase, and set the priority to be the score.
     console.log(localStorage['prevFBCScore']);
-    if(localStorage['prevFBCScore'] == null || localStorage['prevFBCScore'] < newScore) 
+    if(localStorage['prevFBCScore'] == null || localStorage['prevFBCScore'] < newScore) {
         userScoreRef.setWithPriority({ fullname:name, email: email, score:newScore }, newScore);
         localStorage['prevFBCScore'] = newScore
-        
-//    userScoreRef.setWithPriority({ fullname:name, email: email, score:newScore }, newScore);
+    }
 }
 
 function removeStart() {
