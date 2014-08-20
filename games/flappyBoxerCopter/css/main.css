@@ -133,6 +133,7 @@ body
 
 .navbar {
     text-align: center;
+/*    top: -51px;*/
 }
 
 #gamecontainer
@@ -156,8 +157,7 @@ Screen - Game
 #sky
 {
    position: absolute;
-    top: 5px;
-/*   top: 65px;*/
+   top: 5;
    width: 100%;
    height: 420px;
    background-image: url('../assets/sky.png');
@@ -244,16 +244,6 @@ Screen - Game
    background-repeat: no-repeat;
    
    z-index: 1000;
-}
-
-#medal
-{
-   position: absolute;
-   opacity: 0;
-   top: 114px;
-   left: 32px;
-   width: 44px;
-   height: 44px;
 }
 
 #currentscore
@@ -377,6 +367,7 @@ Screen - Game
    background-image: url('../assets/pipe-up.png');
 }
 
+/*
 table {
     -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
@@ -391,8 +382,11 @@ table {
     width: 100%;
     border-collapse: collapse;
 }
+*/
 
 footer {
+    position: absolute;
+    bottom: 0;
     background: #333;
     z-index: 5;
 }
@@ -401,4 +395,27 @@ footer {
     margin-top: 8px;
   color: white;
   background: #E86101;
+}
+
+.semantic-content .close-action,
+.semantic-content .open-modal {
+  -webkit-transition: 0.2s;
+  -o-transition: 0.2s;
+  transition: 0.2s;
+  display: inline-block;
+  background: #111;
+  text-decoration: none;
+  color: #fff;
+  border-radius: 2px;
+  padding: 0.5em 1em;
+}
+
+.semantic-content .close-action:visited,
+.semantic-content .open-modal:visited {
+  color: #fff;
+}
+
+.semantic-content .close-action:hover,
+.semantic-content .open-modal:hover {
+  background: #3db3e5;
 }
