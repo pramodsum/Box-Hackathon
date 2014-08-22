@@ -64,7 +64,6 @@
     <script src="app.js"></script>
     <script src="https://cdn.firebase.com/js/client/1.0.19/firebase.js"></script>
     <script src="js/leaderboard.js"></script>
-    <script src="js/modal.js"></script>
     <script src="../checkLogin.js"></script>
     <link rel="icon" type="image/png" href="../../joystick-25.png">
       
@@ -73,8 +72,6 @@
     <link href="css/main.css" rel="stylesheet">
     <link rel="stylesheet" href="../../style.css">
     <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="modal.css">
-    <link rel="stylesheet" href="modal-show.css">
       
     <!-- Static navbar -->
     <div class="navbar navbar-default navbar-fixed-top">
@@ -91,7 +88,7 @@
           <ul class="nav navbar-nav">
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#leaderboard">Leaderboard</a></li>
+            <li><a data-toggle="modal" data-target="#leaderboard">Leaderboard</a></li>
             <li><a onClick="logout()">Change User</a></li>
           </ul>
         </div>
@@ -132,14 +129,14 @@
       <div class="boundingbox" id="playerbox"></div>
       <div class="boundingbox" id="pipebox"></div>
        
-       <div class="modal hide fade" id="leaderboard" tabindex="-1" data-backdrop="static"
-        role="dialog" aria-labelledby="modal-label" aria-hidden="true">
-
-        <div class="modal-inner">
-            <header id="modal-label">
-                <h2><strong>Leaderboard</strong></h2>
-            </header>
+<!--
+       <div class="modal fade" id="leaderboard" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
             <div class="modal-content">
+              <div class="modal-header">
+                <h2><strong>Leaderboard</strong></h2>
+              </div>
+              <div class="modal-body">
                 <div class="example-base example-leaderboard l-demo-container">
                   <table id="leaderboardTable">
                     <tr>
@@ -149,8 +146,14 @@
                     </tr>
                   </table>
                 </div>
-            </div>
+            </div>    
+          </div>
+          <div class="modal-footer">
+            <button type="button" data-dismiss="modal" class="btn btn-primary">OK</button>
+          </div>
         </div>
+       </div>
+-->
 
         <a href="#!" class="modal-close" title="Close this modal" data-close="Close"
             data-dismiss="modal">×</a>
